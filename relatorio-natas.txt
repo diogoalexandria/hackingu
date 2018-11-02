@@ -1,0 +1,32 @@
+Level 0
+
+- Entrei no http://natas0.natas.labs.overthewire.org
+	-> Username: natas0
+	-> Password: natas0
+- Encontro a frase "Você pode encontrar a senha para o próximo nível nessa página"
+- Abro o DevTools do chrome e no HTML encontro um comentário.
+	-> The password for natas1 is gtVrDuiDfck831PqWsLEZy5gyDz1clto
+
+Leve 0 -> Level 1
+
+- Acessando no http://natas1.natas.labs.overthewire.org
+	-> Username: natas1
+	-> Password: gtVrDuiDfck831PqWsLEZy5gyDz1clto
+- A página diz que meu evento de clique com o botão direito do mouse está bloqueado, mas já com DevTools aberto
+ encontro outro comentário no HTML.
+	-> The password for natas2 is ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi
+- O right clicking está liberado no DevTools eu só copio a senha
+- Acredito que retirar o evento de click com botão direito no mouse seria para impossibilitar que a pessoa inspecione a página dessa forma.
+Fiquei curioso para saber como ele retirou o evento e descobri que ele usou o evento oncontextmenu na tag body e se eu remover o escutar de evento 
+no DevTools consigo apertar o botão direito normalmente.
+
+Level 1 -> Level 2
+
+- Logando em http://natas2.natas.labs.overthewire.org
+	-> Username: natas2
+	-> Password: ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi
+- Recebo uma mensagem dizendo "Não há nada nessa página".
+- Já com DevTools aberto que a uma imagem no final da frase mas não enxergo nada. Perdi bastante tempo com essa imagem!
+- Decido acessar o diretório que a imagem está guardada e finalmente acho um arquivo chamado users.txt
+- Acho um arquivo como um padrão username:password.
+	-> natas3:sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14

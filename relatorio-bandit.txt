@@ -1,0 +1,73 @@
+
+Level 0
+
+- Entendendo o protocolo Secure Shell(SSH)
+- Lendo sobre o comando SSH no Terminal como inserir o usuário, o host e a flag necessária para definir usuario a porta 2220
+	-> ssh  bandit0@bandit.labs.overthewire.org -p 2220
+	-> password: bandit0
+- No trabalho tentei usar e tive problema com proxy da empresa. Entender como resolver isso
+- Tive problema de colocar o dualboot com Windows e Ubuntu na minha máquina.
+- Acabei usando um terminal do ubuntu dentro do windows mesmo
+
+Level 0 -> Level 1
+
+- Apenas listei os arquivos na raiz com o comando ls e encontrei o arquivo readme 
+- Dentro da máquina consegui obter uma senha no arquivo readme atraves do comando cat
+	-> boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+- Descobri q a raiz com esse acesso é o diretório bandito que equivale a fase 0
+- Descendo um diretorio com cd .. e parando no diretorio home, econtrei os diretorios das outras fases
+- Entrando no diretorio bandit1 encontrei o arquivo -, mas não consegui acessar.
+- Loguei na proxima fase com o comando:
+	-> ssh bandit1@bandit.labs.overthewire.org -p 2220
+	-> password: boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+
+Level 1 -> Level 2
+
+- Lendo sobre dashed filename
+- O Bash não consegue ler o "-" como o nome de um arquivo por ser utilizado como prefixo de opçoes para os comandos
+  A maneira que utilizei para o comando cat conseguir identifica o arquivo foi passar o caminho do arquivo
+	-> cat ~/-
+	-> CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+- Retorne ao bandit0 para tenter acessar o arquivo por lá usando o cat da maneira correta e não funcionou.
+
+Level 2 -> Level 3
+
+- Comando ssh com usuário bandit2 e host padrão na porta 2220 com senha adquirida.
+	-> ssh bandit2@bandit.labs.overthewire.org -p 2220
+	-> password: CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+- Essa fase foi bem tranquila, eu só inicie o nome do arquivo para ler o arquivo com cat e usei a tecla tab para auto completar e ele praticamente me deu a resposta
+de como deveria fazer com um arquivo com espaços.
+	-> cat spaces\ in\ this\ filename
+	-> cat "spaces in this filename"
+	-> UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+
+Level 3 -> Level 4
+
+- Loguei na fase.
+	-> ssh bandit3@bandit.labs.overthewire.org -p 2220
+	-> password: UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+- Achei essa fase bem divertida, pois quando listei os arquivos encontrei um "arquivo" com uma cor diferente e não lembrava o que essa cor indicava
+  Usando o comando file eu descobri que era um diretório e acessei o diretório. listando o conteúdo apenas com ls não encontrei nada e já dei uma risadinha
+  Usando a flag -a eu consegui encontrar um arquivo oculto chamando .hidden deu um cat e pronto
+	-> file inhere
+	-> cd inhere 
+	-> ls -a 
+	-> cat .hidden
+	-> pIwrPrtPN36QITSp3EQaw936yaFoFgAB
+
+Level 4 -> Level 5
+
+- Acessei a fase 
+	-> ssh bandit4@bandit.labs.overthewire.org -p 2220
+	-> password: pIwrPrtPN36QITSp3EQaw936yaFoFgAB
+- Na raiz encontro o diretório inhere quando acesso a pasta dessa vez há 10 arquivos
+  ao examinar o primeiro descubro que é do tipo data, resolvo examinar todos e o oitavo arquivo é do tipo ASCII Text.
+	-> cat ./file07
+	-> koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+- Tento encontrar uma forma mais eficiente de encontrar um arquivo "human-readble" com o comando find na internet não encontrei. vai assim mesmo!
+- Descobri uma forma mais rápida de listar todos, conversando com um amigo.
+	-> file ./*
+	-> file ./-file*
+	-> file ./-file0*
+
+Level 5 -> Level 6
