@@ -34,11 +34,16 @@ Level 1 -> Level 2
 Level 2 -> Level 3
 
 - Logando em http://natas3.natas.labs.overthewire.org
-	-> Username: natas2
+	-> Username: natas3
 	-> Password: sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14
 - Recebo novamente uma mensagem dizendo "Não há nada nessa página".
 - Dentro do HTML encontro um comentário "Não há mais vazamentos de informações!! Nem mesmo Google irá encontrar isso dessa vez..."
 - Vasculhando muito a página e não encontrando nada útil, resolvo jogar a frase no google e encontro uma descrição sobre o arquivo robots.txt no site hackmethod.com
--Com mais detalhes no site robotstxt.org encontro que é um arquivo para dar instruções sobre os "web robots" do site.
+- Com mais detalhes no site robotstxt.org encontro que é um arquivo para dar instruções sobre os "web robots" do site.
 	-> http://www.robotstxt.org/robotstxt.html
 	-> https://www.seomarketing.com.br/robots.txt.php
+- Acessando o robots.txt encontro o arquivo que tira a permissão de qualquer bot de acessar o diretório /s3cr3t/.
+- Acessando o /s3cr3t/ encontro o arquivo users.txt com o usuário e senha da próxima fase!
+	-> natas4:Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
+
+Level 3 -> Level 4
