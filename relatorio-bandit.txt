@@ -71,3 +71,19 @@ Level 4 -> Level 5
 	-> file ./-file0*
 
 Level 5 -> Level 6
+
+- Acesso a fase
+	-> ssh bandit5@bandit.labs.overthewire.org -p 2220
+	-> password: koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+- na raiz encontro o famoso inhere e ao abrir encontro 20 diretórios. Abrindo o primeiro encontro arquivos que não consigo abrir, hora de seguir as dicas.
+	-> human-readable
+	-> 1033 bytes in size
+	-> not executable
+- Não encontre a flag no comando find para encontrar apenas arquivos "human-readable". A não ser que tivesse que listar todos os arquivos em todos os diretórios como fiz no level anterior.
+- Proxima condição tamanho de 1033 bytes, uso o comando find com a flag -size  e li que a unidade que represntava bytes era c. Assim encontrei apenas 1 arquivo.
+	-> find -size 1033c
+	-> cat ./maybehere07/.file2
+	-> DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+- Pesquise e testei o comando find com a flag -executable e a negação com ! -executable. Não seria suficiente para encontrar o arquivo.
+
+Level 6 -> Level 7
