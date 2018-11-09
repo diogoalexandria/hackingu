@@ -86,4 +86,41 @@ Level 5 -> Level 6
 	-> DXjZPULLxYr17uwoI01bNLQbtFemEgo7
 - Pesquise e testei o comando find com a flag -executable e a negação com ! -executable. Não seria suficiente para encontrar o arquivo.
 
-Level 6 -> Level 7
+(09/11/2018)
+Level 6 -> Level 7 
+
+- logo na fase
+	-> ssh bandit6@bandit.labs.overthewire.org -p 2220
+	-> password: DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+- Dou um ls na raiz e não encontro nada. Tenho voltar um diretório e acesso a home, lá acesso o diretório bandit7 encontro uo arquivo data.txt  mas não tenho permissão para acessar o conteudo com cat.
+- Volto no usuário bandit6 tento listar os arquivos ocultos e encontro 3 arquivos.
+	-> .bash_logout
+	-> .bashrc
+	-> profile
+- Não encontro nada nos arquivos, to perdido! 
+- Não sei pq se to cansado ou sou um mané. Mas acho q a sexta a noite ta me afetando.
+- Lendo sobre usuários e grupos encontro o site:
+	-> https://www.cyberciti.biz/faq/how-do-i-find-all-the-files-owned-by-a-particular-user-or-group/
+	-> find directory-location -group {group-name} -name {file-name}
+- Uso o comando find passando o diretório q quero percorrer o usuário e o grupo q detem o arquivo
+	-> find / -user bandit7 -group bandit6
+- Encontro um monte de acesso negado mas falta um parametro para filtrar melhor!
+	-> find / -user bandit7 -group bandit6 -size 33c 
+- Não melhora tanto, mas encontro um caminho.
+	-> /var/lib/dpkg/info/bandit7.password
+- Finalmente
+	-> HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+
+Level 7 -> Level 8
+
+-Acessando a fase
+	-> ssh bandit7@bandit.labs.overthewire.org -p 2220
+	-> password: HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+- Encontro o data.txt no usuário bandit7 e com cat no arquivo boom! 5s imprimindo chaves na tela!
+- Lendo os comandos indicados o grep é oq mais faz sentido. Preciso passar oq o grep deve procurar e qual arquivo.
+	-> grep millionth data.txt
+	-> cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+- Essa foi mais tranquila!
+
+Level 8 -> Level 9
+	
