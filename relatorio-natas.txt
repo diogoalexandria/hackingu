@@ -47,3 +47,29 @@ Level 2 -> Level 3
 	-> natas4:Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
 
 Level 3 -> Level 4
+	
+- Acessando http://natas4.natas.labs.overthewire.org
+	-> Username: natas4
+	-> Password: Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
+- Recebo a mensagem e um link refresh page
+	-> Access disallowed. You are visiting from "" while authorized users should come only from "http://natas5.natas.labs.overthewire.org/"
+- Clicando no link a mensagem é alterada
+	->Access disallowed. You are visiting from "http://natas4.natas.labs.overthewire.org/index.php" while authorized users should come only from "http://natas5.natas.labs.overthewire.org/"
+- Lendo as mensagens fica bem claro que há alguma lógica que altera a mensagem do site, pq quanto acesso o servidor pela primeira vez ele diz q eu vendo de lugar nenhum e deveria vir do natas5.
+  Quando acesso o link de dentro da página diz q eu vim do natas4, onde eu tava e deveria vir do natas5.
+- Baixei o index.php pra ver se conseguia encontrar algo, e só encontrei o html da segunda pagina.
+- Depois de abrir o área network da ferramenta do desenvolver do chrome e tentar entender como estão funcionando as requisições http e como ele sabe da onde estou vindo, descubro que tem no campo
+  request há uma informação chamado referer que aparece na segunda página apenas que indica da onde foi feita a requisição.
+- Pesquisando descobri a extensão tamper que permite alterar o header do http request, especificamente o referer. E voilà
+	-> A senha para o Natas5 é iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
+
+Level 4 -> Level 5
+
+- Acessando http://natas5.natas.labs.overthewire.org
+	-> Username: natas5
+	-> Password: iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
+- Quando eu entro recebo a mensagem dizendo que me acesso não está permitido e que estou deslogado. Acompanhando a lógica da fase anterior vou chegar nas informações do cabeçalho HTTP pra ver 
+  como o browser e o servidor se comunicaram.
+- Na resposta do servidor encontro que ele setou um cookie loggedin=0, ou seja, falso o valor para estar logado.
+- Tentando alterar com tamper. Demora a vida pra me responder! Mas foi.
+	-> Acesso permitido. A senha pro Natas6 é aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1
