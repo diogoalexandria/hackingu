@@ -108,12 +108,12 @@ Level 6 -> Level 7
 	-> find / -user bandit7 -group bandit6 -size 33c 
 - Não melhora tanto, mas encontro um caminho.
 	-> /var/lib/dpkg/info/bandit7.password
-- Finalmente
+- Usando cat bandit.paswword. Finalmente!
 	-> HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
 
 Level 7 -> Level 8
 
--Acessando a fase
+- Acessando a fase
 	-> ssh bandit7@bandit.labs.overthewire.org -p 2220
 	-> password: HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
 - Encontro o data.txt no usuário bandit7 e com cat no arquivo boom! 5s imprimindo chaves na tela!
@@ -123,4 +123,18 @@ Level 7 -> Level 8
 - Essa foi mais tranquila!
 
 Level 8 -> Level 9
-	
+
+- Começo com a leitura recomendada pela fase.	
+- Acesso a fase
+	-> ssh bandit8@bandit.labs.overthewire.org -p 2220
+	-> password: cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+- Dando cat no arquivo data.txt encontro inúmeras senhas. 
+- Lendo sobre os comandos recomandados encontro o comando uniq que faz muito sentido usar e o comando sort com a flag -u de uniq para encontrar arquivos q não se repetem. Vou testar os dois!
+	-> https://www.youtube.com/watch?v=FzuAjHcKvzg
+	-> https://www.youtube.com/watch?v=2lT92u5RR-c
+- Usando o comando sort no arquivo data.txt vi q ele organizou as senhas juntando todas as linhas iguais. O arquivo uniq elimina linhas duplicadas adjacentes do output.
+- Na leitura recomendada diz q posso usar o | (pipe) para juntar dois comandos. 
+	-> sort data.txt | uniq -u
+	-> UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+
+Level 9 -> Level 10

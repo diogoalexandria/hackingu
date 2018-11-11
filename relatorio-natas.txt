@@ -73,3 +73,5 @@ Level 4 -> Level 5
 - Na resposta do servidor encontro que ele setou um cookie loggedin=0, ou seja, falso o valor para estar logado.
 - Tentando alterar com tamper. Demora a vida pra me responder! Mas foi.
 	-> Acesso permitido. A senha pro Natas6 é aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1
+
+Level 5 -> Level 6
