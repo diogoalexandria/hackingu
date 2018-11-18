@@ -138,3 +138,18 @@ Level 8 -> Level 9
 	-> UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
 
 Level 9 -> Level 10
+
+-Acessando a fase encontro o arquivo data.txt
+	-> ssh bandit9@bandit.labs.overthewire.org -p 2220
+	-> password: UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+- Duas vezes tentando usar o comando cat no data.txt o terminal travou, vou ler as dicas da fase.
+- Tenho descobrir que tipo de arquivo é usando o file data.txt, e descubro que é um arquivo tipo data.
+- Lendo os comandos recomendados
+- Tento pegar linhas com sinais de igual seguindo com o grep e não consigo. 
+	-> Binary file data.txt matches
+- Com o segundo comando q faz sentido o strings data.txt, consigo ver o arquivo e encontro a senha.
+- Mas refinando com oq foi aconselhado no level anterior chego a melhor resposta. 
+	-> strings data.txt | grep '=='
+	-> truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+
+Level 10 -> Level 11

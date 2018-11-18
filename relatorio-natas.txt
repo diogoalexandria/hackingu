@@ -75,3 +75,27 @@ Level 4 -> Level 5
 	-> Acesso permitido. A senha pro Natas6 é aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1
 
 Level 5 -> Level 6
+
+- logando em http://natas6.natas.labs.overthewire.org/
+	-> Username: natas6
+	-> Password: aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1
+- Entro e vejo q preciso inserir uma palavra secreta e no canto do box há um link "View sourcecode".
+  Acesso e vejo um código.
+	-> include "includes/secret.inc";
+
+    		if(array_key_exists("submit", $_POST)) {
+        		if($secret == $_POST['secret']) {
+        		print "Access granted. The password for natas7 is <censored>";
+    		} else {
+        		print "Wrong secret";
+    		}
+   		}
+	  ?>
+- O código com if testa se o valor inserido corresponde ao valor esperado para liberar a senha pra próxima fase.
+  Senão ele diz q vc errou a senha.
+- Lendo sobre o função include no php e a extenção .inc. Descubro q a função include pode passar um arquivo para ser usado a função e a extensão .inc é utlizada para representar arquivos q serão incluidos.
+- Indo atrás desse arquivo seguindo seu path. 
+	-> http://natas6.natas.labs.overthewire.org/includes/secret.inc
+	-> <?
+	   $secret = "FOEIUWGHFEEUHOFUOIU";
+	   ?>
