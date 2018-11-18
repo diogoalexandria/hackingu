@@ -99,3 +99,8 @@ Level 5 -> Level 6
 	-> <?
 	   $secret = "FOEIUWGHFEEUHOFUOIU";
 	   ?>
+- Insiro a palavra secreta no campo no natas6 e pronto!
+	-> Access granted. The password for natas7 is 
+           7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
+
+Level 6 -> Level 7
