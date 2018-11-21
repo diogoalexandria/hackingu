@@ -153,3 +153,26 @@ Level 9 -> Level 10
 	-> truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
 
 Level 10 -> Level 11
+
+- Lendo a página recomendada sobre Base64
+- Logando na fase.
+	-> ssh bandit10@bandit.labs.overthewire.org -p 2220
+	-> password: truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+- Encontro o famoso data.txt e acesso suas informações.
+- Leio o manual do comando base64. Usando o comando base64 com a flag decode no arquivo data.txt.
+	-> base64 -d data.txt
+	-> The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+
+Level 11 -> Level 12
+
+- Ultima fase?! Lendo a página recomendada sobre ROT13.
+- Acessando a fase.
+	-> ssh bandit11@bandit.labs.overthewire.org -p 2220
+	-> password: IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+- Acesso a fase e listando os arquivos encontro o data.txt e inspeciono o arquivo.
+- Não entendi exatamente como o comando tr le a rotação em 13 posições, mas faz diferença a ordem q você manda ele lê? Talvez!
+- Depois de algumas tentativas eu encontro a forma correta.
+	-> cat data.txt | tr [:upper:][:lower:] 'N-ZA-Mn-za-m'
+	-> The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+- Fechado o bandit da tarefa 1!! 
+	
