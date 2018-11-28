@@ -68,7 +68,7 @@ Level 4 -> Level 5
 - Acessando http://natas5.natas.labs.overthewire.org
 	-> Username: natas5
 	-> Password: iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
-- Quando eu entro recebo a mensagem dizendo que me acesso não está permitido e que estou deslogado. Acompanhando a lógica da fase anterior vou chegar nas informações do cabeçalho HTTP pra ver 
+- Quando eu entro recebo a mensagem dizendo que me acesso não está permitido e que estou deslogado. Acompanhando a lógica da fase anterior vou checar nas informações do cabeçalho HTTP pra ver 
   como o browser e o servidor se comunicaram.
 - Na resposta do servidor encontro que ele setou um cookie loggedin=0, ou seja, falso o valor para estar logado.
 - Tentando alterar com tamper. Demora a vida pra me responder! Mas foi.
@@ -93,7 +93,7 @@ Level 5 -> Level 6
 	  ?>
 - O código com if testa se o valor inserido corresponde ao valor esperado para liberar a senha pra próxima fase.
   Senão ele diz q vc errou a senha.
-- Lendo sobre o função include no php e a extenção .inc. Descubro q a função include pode passar um arquivo para ser usado a função e a extensão .inc é utlizada para representar arquivos q serão incluidos.
+- Lendo sobre o função include no php e a extenção .inc. Descubro q a função include pode passar um arquivo para ser usado a função e a extensão .inc é utilizada para representar arquivos q serão incluidos.
 - Indo atrás desse arquivo seguindo seu path. 
 	-> http://natas6.natas.labs.overthewire.org/includes/secret.inc
 	-> <?
@@ -104,3 +104,70 @@ Level 5 -> Level 6
            7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
 
 Level 6 -> Level 7
+
+- Acessando a fase.
+	-> Username: natas7
+	-> Password: 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
+- Na fase encontro dois links "home" e "about".
+- Quando clico em home a pagina retorna uma mensagem e percebo que passa um parametro page na url.
+	-> this is the front page.
+	-> http://natas7.natas.labs.overthewire.org/index.php?page=home
+- O mesmo acontece com o link about.
+	-> this is the about page
+	-> http://natas7.natas.labs.overthewire.org/index.php?page=about
+- Tento alterar o parametro page para password.
+	-> Warning: include(password): failed to open stream: No such file or directory in /var/www/natas/natas7/index.php on line 21
+	   Warning: include(): Failed opening 'password' for inclusion (include_path='.:/usr/share/php:/usr/share/pear') in /var/www/natas/natas7/index.php on line 21
+- Depois de muito tempo preso(Perdi muito tempo nessa fase!) nessa fase volto com mais calma e encontro algo que por vacilo tinha deixado passar. Há uma dica no HTML!
+	-> <!-- hint: password for webuser natas8 is in /etc/natas_webpass/natas8 -->
+- Passando esse path como parametro 'page' na url eu consigo acessar a senha, oq eu entendi q o parametro na verdade serve como um path de arquivos q deve ser acessado.
+	-> DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
+
+Level 7 -> Level 8
+
+- Acessando o ultimo nivel do desafio!
+	-> Username: natas7
+	-> Password: DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
+- A página pede para eu inserir uma palavra secreta e disponibiliza um link "view sourcecode". muito parecido com level 6!
+- No link encontro um código. Analisando o código ele salva uma variável q é o resultado de um processo de alteração em uma senha e declara uma função q pega uma senha e altera com algumas outras funções.
+- Depois há uma fluxo que testa se a senha q foi passada apos as alterações é igual ao valor da variável. Se forigual senha para o Natas 9, senão "Senha errada!"
+	-> <?
+
+		$encodedSecret = "3d3d516343746d4d6d6c315669563362";
+
+		function encodeSecret($secret) {
+    			return bin2hex(strrev(base64_encode($secret)));
+		}
+
+		if(array_key_exists("submit", $_POST)) {
+    			if(encodeSecret($_POST['secret']) == $encodedSecret) {
+    				print "Access granted. The password for natas9 is <censored>";
+    			} else {
+    				print "Wrong secret";
+    			}
+		}
+	   ?>
+- Primeira coisa que pensei foi como rodar um código PHP(Nunca mexi com php), e printar o de alguma forma a resposta. Entendendo melhor a função e pesquisando sobres as funções, descobri q a unções dentor da função declara são funções do php
+- Onde a base64_encode() codofica a string em base64, a strrev() inverte a string e a bin2hex() converte um dado bináro para hexadecimal.
+	-> http://php.net/manual/pt_BR/function.base64-encode.php
+	-> http://php.net/manual/pt_BR/function.strrev.php
+	-> http://php.net/manual/pt_BR/function.bin2hex.php
+- Se primeiro ele codifica a respota em Base64, para depois inverte o resltado e transformar em hexadecimal para estar igual ao valor da variável $encodedSecret.
+- Preciso converter a variável para binário novamente, depois inverte o valor e por fim decodificar da base64 pra encontrar a resposta!
+- Encontrei um site q executa códigos php
+	- http://www.writephponline.com/
+- Executando a sequencia de código.
+	-> $encodedSecret = "3d3d516343746d4d6d6c315669563362";
+	-> $encodedSecret2 = hex2bin($encodedSecret);
+	   echo "$\nencodedSecret2";
+	-> $encodedSecret3 = strrev($encodedSecret2);
+	   echo "\n$encodedSecret3";
+	-> $encodedSecret4 = base64_decode($encodedSecret3);
+	   echo "\n$encodedSecret4";
+- obtive a seguinte saída:
+	-> ==QcCtmMml1ViV3b
+	   b3ViV1lmMmtCcQ==
+ 	   oubWYf2kBq
+- Testando a palavra secreta na página.
+	-> Access granted. The password for natas9 is W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
+
